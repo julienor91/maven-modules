@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- =============================================================== -->
+  <!-- INFORMATIONS DU PROJET -->
+  <!-- =============================================================== -->
+  
+  <!-- ===== Informations Maven ===== -->
+  
+  <groupId>org.exemple.demo</groupId>
+  <artifactId>ticket</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <!-- ===== Informations générales ===== -->
+
+  <name>ticket</name>
+  <url>http://maven.apache.org</url>
+  
+  <!-- =============================================================== -->
+  <!-- PROPERTIES -->
+  <!-- =============================================================== -->
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
+  <!-- =============================================================== -->
+  <!-- MODULES (=> SOUS DOSSIER) -->
+  <!-- =============================================================== -->
+
+  <modules>
+    <module>ticket-batch</module>
+    <module>ticket-webapp</module>
+    <module>ticket-business</module>
+    <module>ticket-consumer</module>
+    <module>ticket-model</module>
+  </modules>
+
+  <!-- =============================================================== -->
+    <!-- GESTION DES DEPENDANCES -->
+    <!-- =============================================================== -->
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- ===== Modules ===== -->
+
+            <dependency>
+                <groupId>org.exemple.demo</groupId>
+                <artifactId>ticket-batch</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple.demo</groupId>
+                <artifactId>ticket-webapp</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple.demo</groupId>
+                <artifactId>ticket-business</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple.demo</groupId>
+                <artifactId>ticket-consumer</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.exemple.demo</groupId>
+                <artifactId>ticket-model</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- ===== Bibliothèques tierces ===== -->
+            
+            <!-- On n'a pas besoin ici de placer junit dans le projet parent. 
+                 Cependant les bibliothèques peuvent être enregistrées dans le
+                 projet parent pour les utiliser dans les modules enfants. -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.bval</groupId>
+                <artifactId>bval-jsr</artifactId>
+                <version>1.1.2</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
