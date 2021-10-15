@@ -1,30 +1,76 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.exemple.demo</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <groupId>org.exemple.demo</groupId>
-  <artifactId>ticket-consumer</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>ticket-consumer</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-            <groupId>org.exemple.demo</groupId>
-            <artifactId>ticket-model</artifactId>
-        </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- =============================================================== -->
+	<!-- ***** INFORMATIONS DU MODULE WEBAPP ***** -->
+	<!-- =============================================================== -->
+	
+	<!-- ===== PROJET PARENT ===== -->
+	
+	<parent>
+		<!-- groupId : identifiant de l'organisation gérant le projet. Cet identifiant 
+			reprend la notation des packages Java. En général, celui-ci correspond au 
+			package de base de l'application, mais ce n'est pas obligatoire. -->
+		<groupId>org.exemple.demo</groupId>
+		<!-- artifactId : identifiant du projet -->
+		<artifactId>ticket</artifactId>
+		<!-- version : version du projet. Le suffixe -SNAPSHOT veut dire que le 
+			code de cette version de l'application n'est pas figé. C'est une version 
+			en cours de développement. Par opposition, si la version ne se termine pas 
+			par le suffixe -SNAPSHOT, cela signifie qu'il s'agit d'une release de l'application 
+			et que son code est figé. Il faudra donc retirer -SNAPSHOT dans le paramètre 
+			<version> -->
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
+	<!-- ===== AUTRES INFORMATIONS MAVEN ===== -->
+	
+	<!-- artifactId : identifiant du projet -->
+	<artifactId>ticket-consumer</artifactId>
+	
+	<!-- ===== INFORMATIONS GENERALES ===== -->
+	
+	<!-- name : le nom du module -->
+	<name>ticket-consumer</name>
+	<url>http://maven.apache.org</url>
+	
+	<!-- =============================================================== -->
+	<!-- ***** PROPERTIES (=> CONSTANTES DU POM) ***** -->
+	<!-- =============================================================== -->
+	
+	<!-- Les properties sont des sortes de constantes. Elles sont remplacées par leur valeur 
+		lors de l'exécution de Maven en utilisant la notation ${maPropriete} (qui sera remplacée 
+		par la valeur de la propriété maPropriete). -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<!-- =============================================================== -->
+	<!-- ***** DEPENDENCIES (=> GESTION DES DEPENDANCES) ***** -->
+	<!-- =============================================================== -->
+	
+	<dependencies>
+	
+		<!-- ===== MODULES (=> DEPENDANCES) ===== -->
+		
+		<dependency>
+			<groupId>org.exemple.demo</groupId>
+			<artifactId>ticket-model</artifactId>
+		</dependency>
+		
+		<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
+		
+		<!-- Les bibliothèques enregistrées dans le projet parent sont utilisé par ce module. 
+			Du coup on peut ajouter ces bibliothèque de la même manière qu'un module. -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
 </project>

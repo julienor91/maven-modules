@@ -1,111 +1,185 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
-  <modelVersion>4.0.0</modelVersion>
-  
-  <!-- =============================================================== -->
-  <!-- INFORMATIONS DU PROJET -->
-  <!-- =============================================================== -->
-  
-  <!-- ===== Informations Maven ===== -->
-  
-  <groupId>org.exemple.demo</groupId>
-  <artifactId>ticket</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  <!-- ===== Informations générales ===== -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+									 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <name>ticket</name>
-  <url>http://maven.apache.org</url>
-  
-  <!-- =============================================================== -->
-  <!-- PROPERTIES -->
-  <!-- =============================================================== -->
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-  
-  <!-- =============================================================== -->
-  <!-- MODULES (=> SOUS DOSSIER) -->
-  <!-- =============================================================== -->
+	<modelVersion>4.0.0</modelVersion>
 
-  <modules>
-    <module>ticket-batch</module>
-    <module>ticket-webapp</module>
-    <module>ticket-business</module>
-    <module>ticket-consumer</module>
-    <module>ticket-model</module>
-  </modules>
+	<!-- =============================================================== -->
+	<!-- ***** INFORMATIONS DU PROJET ***** -->
+	<!-- =============================================================== -->
 
-  <!-- =============================================================== -->
-    <!-- GESTION DES DEPENDANCES -->
-    <!-- =============================================================== -->
+	<!-- ===== INFORMATIONS MAVEN ===== -->
 
-    <dependencyManagement>
-        <dependencies>
+	<!-- groupId : identifiant de l'organisation gérant le projet. Cet identifiant 
+		reprend la notation des packages Java. En général, celui-ci correspond au 
+		package de base de l'application, mais ce n'est pas obligatoire. -->
+	<groupId>org.exemple.demo</groupId>
+	<!-- artifactId : identifiant du projet -->
+	<artifactId>ticket</artifactId>
+	<!-- version : version du projet. Le suffixe -SNAPSHOT veut dire que le 
+		code de cette version de l'application n'est pas figé. C'est une version 
+		en cours de développement. Par opposition, si la version ne se termine pas 
+		par le suffixe -SNAPSHOT, cela signifie qu'il s'agit d'une release de l'application 
+		et que son code est figé. Il faudra donc retirer -SNAPSHOT dans le paramètre 
+		<version> -->
+	<version>1.0-SNAPSHOT</version>
+	<!-- packaging : type de packaging devant être généré par Maven (jar, war, 
+		ear, ...). -->
+	<packaging>pom</packaging>
+	<!-- Un projet Maven est identifié par ses coordonnées : groupId:artifactId:version -->
 
-            <!-- ===== Modules ===== -->
+	<!-- ===== INFORMATIONS GENERALES ===== -->
 
-            <dependency>
-                <groupId>org.exemple.demo</groupId>
-                <artifactId>ticket-batch</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.exemple.demo</groupId>
-                <artifactId>ticket-webapp</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.exemple.demo</groupId>
-                <artifactId>ticket-business</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.exemple.demo</groupId>
-                <artifactId>ticket-consumer</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.exemple.demo</groupId>
-                <artifactId>ticket-model</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
+	<!-- name : le nom du projet -->
+	<name>ticket</name>
+	<!-- url : URL du projet ou de l'application en production. -->
+	<url>http://maven.apache.org</url>
+	<!-- description : la description du projet -->
+	<description>
+		La super application qui sert à faire ceci ou cela...
+	</description>
+	
+	<!-- ===== ORGANISATION ===== -->
+  	
+	<organization>
+		<name>Mon Entreprise</name>
+		<url>http://www.exemple.org</url>
+   	</organization>
 
-            <!-- ===== Bibliothèques tierces ===== -->
-            
-            <!-- On n'a pas besoin ici de placer junit dans le projet parent. 
-                 Cependant les bibliothèques peuvent être enregistrées dans le
-                 projet parent pour les utiliser dans les modules enfants. -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.1.0.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.bval</groupId>
-                <artifactId>bval-jsr</artifactId>
-                <version>1.1.2</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-                <scope>provided</scope>
-            </dependency>
+	<!-- ===== LICENCES ===== -->
 
-        </dependencies>
-    </dependencyManagement>
+	<licenses>
+          	<license>
+                	<name>Apache License, Version 2.0</name>
+                	<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        	</license>
+	</licenses>
 
+	<!-- =============================================================== -->
+	<!-- ***** PROPERTIES (=> CONSTANTES DU POM) ***** -->
+	<!-- =============================================================== -->
+
+	<!-- Les properties sont des sortes de constantes. Elles sont remplacées par leur valeur 
+		lors de l'exécution de Maven en utilisant la notation ${maPropriete} (qui sera remplacée 
+		par la valeur de la propriété maPropriete). -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Attention, on doit changer la version "1.7" si un problème survient avec la commande "mvn package" -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<!-- =============================================================== -->
+	<!-- ***** MODULES (=> SOUS DOSSIER) ***** -->
+	<!-- =============================================================== -->
+
+	<modules>
+		<module>ticket-batch</module>
+		<module>ticket-webapp</module>
+		<module>ticket-business</module>
+		<module>ticket-consumer</module>
+		<module>ticket-model</module>
+	</modules>
+
+	<!-- =============================================================== -->
+	<!-- ***** DEPENDENCIES (=> GESTION DES DEPENDANCES) ***** -->
+	<!-- =============================================================== -->
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- ===== MODULES ===== -->
+
+			<dependency>
+				<groupId>org.exemple.demo</groupId>
+				<artifactId>ticket-batch</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.exemple.demo</groupId>
+				<artifactId>ticket-webapp</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.exemple.demo</groupId>
+				<artifactId>ticket-business</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.exemple.demo</groupId>
+				<artifactId>ticket-consumer</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.exemple.demo</groupId>
+				<artifactId>ticket-model</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+
+			<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
+
+			<!-- On n'a pas besoin ici de placer junit dans le projet parent. Cependant 
+				les bibliothèques peuvent être enregistrées dans le projet parent pour les 
+				utiliser dans les modules enfants. -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.bval</groupId>
+				<artifactId>bval-jsr</artifactId>
+				<version>1.1.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+	
+	<!-- =============================================================== -->
+	<!-- ***** BUILD ***** -->
+	<!-- =============================================================== -->
+	
+	<build>
+		<!-- Gestion des plugins (version) -->
+		<pluginManagement>
+			<plugins>
+				<!-- Plugin responsable de la génération du fichier JAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<!-- Création du Manifest pour la définition de la classe Main -->
+						<manifest>
+							<mainClass>org.exemple.demo.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
