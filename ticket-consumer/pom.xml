@@ -6,17 +6,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<!-- =============================================================== -->
-	<!-- ***** INFORMATIONS DU MODULE WEBAPP ***** -->
+	<!-- ***** INFORMATIONS DU MODULE CONSUMER ***** -->
 	<!-- =============================================================== -->
 	
 	<!-- ===== PROJET PARENT ===== -->
 	
+	<!-- On indique ici le projet parent -->
 	<parent>
 		<!-- groupId : identifiant de l'organisation gérant le projet. Cet identifiant 
 			reprend la notation des packages Java. En général, celui-ci correspond au 
-			package de base de l'application, mais ce n'est pas obligatoire. -->
+			package de base de l'application, mais ce n'est pas obligatoire. Dans le cas 
+			d'un module, on reprend obligatoirement le "groupId" du projet parent -->
 		<groupId>org.exemple.demo</groupId>
-		<!-- artifactId : identifiant du projet -->
+		<!-- artifactId : identifiant du projet parent -->
 		<artifactId>ticket</artifactId>
 		<!-- version : version du projet. Le suffixe -SNAPSHOT veut dire que le 
 			code de cette version de l'application n'est pas figé. C'est une version 
@@ -71,6 +73,33 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
+	
+	<!-- =============================================================== -->
+    <!-- ***** BUILD ***** -->
+    <!-- =============================================================== -->
+    
+    <build>
+    
+        <plugins>
+            <plugin>
+            	<!-- Ce plugin est déjà configuré dans le projet parent, il est donc inutile 
+            		d'ajouter la balise version. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <!--  Configuration de la classe Main de ce module via le goal jar du plugin 
+                	"maven-jar-plugin" -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.exemple.demo.consumer.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+        
+    </build>
 	
 </project>

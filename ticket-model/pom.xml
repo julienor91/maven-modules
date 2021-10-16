@@ -6,17 +6,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<!-- =============================================================== -->
-	<!-- ***** INFORMATIONS DU MODULE WEBAPP ***** -->
+	<!-- ***** INFORMATIONS DU MODULE MODEL ***** -->
 	<!-- =============================================================== -->
 	
 	<!-- ===== PROJET PARENT ===== -->
 	
+	<!-- On indique ici le projet parent -->
 	<parent>
 		<!-- groupId : identifiant de l'organisation gérant le projet. Cet identifiant 
 			reprend la notation des packages Java. En général, celui-ci correspond au 
-			package de base de l'application, mais ce n'est pas obligatoire. -->
+			package de base de l'application, mais ce n'est pas obligatoire. Dans le cas 
+			d'un module, on reprend obligatoirement le "groupId" du projet parent -->
 		<groupId>org.exemple.demo</groupId>
-		<!-- artifactId : identifiant du projet -->
+		<!-- artifactId : identifiant du projet parent -->
 		<artifactId>ticket</artifactId>
 		<!-- version : version du projet. Le suffixe -SNAPSHOT veut dire que le 
 			code de cette version de l'application n'est pas figé. C'est une version 
@@ -53,9 +55,10 @@
 	<!-- ***** DEPENDENCIES (=> GESTION DES DEPENDANCES) ***** -->
 	<!-- =============================================================== -->
 	
-	<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
-	
 	<dependencies>
+		
+		<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
+		
 		<!-- Les bibliothèques enregistrées dans le projet parent sont utilisé par ce module. 
 			Du coup on peut ajouter ces bibliothèque de la même manière qu'un module. -->
 		<dependency>
@@ -63,13 +66,14 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 	
 	<!-- =============================================================== -->
 	<!-- ***** PROFILS ***** -->
 	<!-- =============================================================== -->
 	
-	<!-- Creation de deux profiles nommés avec un id -->
+	<!-- Creation de deux profiles spécifiés par un id -->
 	<profiles>
 		<profile>
 			<id>test</id>
@@ -82,9 +86,6 @@
 							que Maven va chercher à l'intérieur de ces fichiers les propriétés et les remplacer par 
 							leurs valeurs comme il le fait naturellement dans fichier pom.xml -->
 						<directory>src/main/resources/conf-test</directory>
-						<!-- Les fichiers contenus dans src/main/resources seront filtrés, c'est à dire que Maven 
- 							va chercher à l'intérieur de ces fichiers les propriétés et les remplacer par leurs valeurs 
- 							comme il le fait naturellement dans fichier pom.xml -->
 						<filtering>true</filtering>
 					</resource>
 				</resources>
@@ -107,5 +108,29 @@
 			</build>
 		</profile>
 	</profiles>
+	
+	<!-- =============================================================== -->
+    <!-- ***** BUILD ***** -->
+    <!-- =============================================================== -->
+    
+	<build>
+        <plugins>
+            <plugin>
+            	<!-- Ce plugin est déjà configuré dans le projet parent, il est donc inutile 
+            		d'ajouter la balise version. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <!--  Configuration de la classe Main de ce module via le goal jar du plugin 
+                	"maven-jar-plugin" -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.exemple.demo.batch.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 	
 </project>

@@ -87,6 +87,9 @@
 	<!-- ***** DEPENDENCIES (=> GESTION DES DEPENDANCES) ***** -->
 	<!-- =============================================================== -->
 
+	<!-- "dependencyManagement" est comme "pluginManagement" -->
+	<!-- La balise "dependencyManagement" enregistre les dépendances qui pourront être 
+		utilisées par l'ensemble des modules du projet -->
 	<dependencyManagement>
 		<dependencies>
 
@@ -120,9 +123,9 @@
 
 			<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
 
-			<!-- On n'a pas besoin ici de placer junit dans le projet parent. Cependant 
-				les bibliothèques peuvent être enregistrées dans le projet parent pour les 
-				utiliser dans les modules enfants. -->
+			<!-- En déclarant les dépendances à cet emplacement, soit dans les balises 
+				"dependencyManagement", alors l'ensemble de ces bibliothèques pourront 
+				être réutilisés par tous les modules du projet. -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -155,31 +158,36 @@
 	<!-- =============================================================== -->
 	
 	<build>
-		<!-- Gestion des plugins (version) -->
-		<pluginManagement>
+		<!-- "pluginManagement" est utilisé pour la gestion des plugins et leur version 
+			dans le pom principal. Cela sert à définir l'ensemble des plugins disponible 
+			qui pourront être utilisés dans le projet, et donc par tous les modules -->
+		<!-- "pluginManagement" est comme "dependencyManagement" permettant de 
+			réaliser comme une sorte d'héritage -->
+		<pluginManagement>	
 			<plugins>
+				
 				<!-- Plugin responsable de la génération du fichier JAR -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
+					<artifactId>maven-jar-plugin</artifactId><!-- plugin -->
 					<version>3.0.2</version>
 				</plugin>
-			</plugins>
+				
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId><!-- plugin -->
+	                <version>3.1</version>
+	                <!-- Pour modifier les options "showDeprecation" et "showWarnings" du goal "compile" 
+						du plugin "maven-compiler-plugin" -->
+	                <configuration>
+	                    <showDeprecation>true</showDeprecation>
+	                    <showWarnings>true</showWarnings>
+	                </configuration>
+	            </plugin>
+	            
+	    	</plugins>
 		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<!-- Création du Manifest pour la définition de la classe Main -->
-						<manifest>
-							<mainClass>org.exemple.demo.App</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
+		
 	</build>
 	
 </project>
