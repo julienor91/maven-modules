@@ -1,0 +1,54 @@
+<!-- Fichier créer spécifiquement pour l'assemblage du fichier JAR -->
+<assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 
+          								   http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <!-- Identifiant de l'assemblage -->
+    <!-- id : l'identifiant de l'assemblage. Maven va se servir de cet identifiant 
+    	dans le nom des fichiers générés : <project.finalName>-<id>.<format>. Ce 
+    	qui donnerait par exemple : ticket-batch-1.0-SNAPSHOT-archive-deploy.tar.gz. -->
+    <id>archive-deploy</id>
+
+    <!-- Les formats d'archive à générer. Ici un fichier tar.gz et un fichier zip. -->
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+
+	<!-- On définit ici ce que l'on veut mettre dans cet assemblage. -->
+    <!-- lib : dépendances + JAR ticket-batch. Ajout d'un ensemble de dépendances. 
+    	Ici, on ajoute toutes les dépendances de runtime (scope runtime et compile) 
+    	du projet dans le répertoire de destination lib.-->
+    <dependencySets>
+        <dependencySet>
+        	<!-- La balise <dependencySet> aura pour destination le répertoire lib pour 
+        		tous les scopes "runtime" -->
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+	<!-- Ajout d'un ensemble de fichiers. Ici, on ajoute deux ensembles de fichiers : 
+		1 - Les scripts de lancement des batchs contenus dans le répertoire src/data/scripts 
+			sont mis dans le répertoire de destination bin. On y positionne les droits Unix, 
+			notamment celui d'exécution : <fileMode>0755</fileMode> (-rwxr-x-rx).
+		2 - Les fichiers de configuration contenus dans le répertoire src/data/conf, dans le 
+			répertoire de destination conf.-->
+    <fileSets><!-- 1 -->
+        <!-- Scripts shell de lancement des batchs -->
+        <fileSet>
+            <directory>src/data/scripts</directory>
+            <outputDirectory>bin</outputDirectory>
+            <!-- Droits UNIX sur les fichiers (-rwx-rx-rx) -->
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <!-- Fichiers de configuration -->
+        <fileSet><!-- 2 -->
+            <directory>src/data/conf</directory>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+    </fileSets>
+    
+</assembly>

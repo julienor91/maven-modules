@@ -79,7 +79,7 @@
 			<id>test</id>
 			<!-- On configure le build propre à chaque environnement, ici le profile test -->
 			<build>
-				<resources>
+				<resources><!-- Cela marche également avec les balises <plugins><plugin> -->
 					<resource>
 						<!-- On précise que l'on utilisera ce fichier en spécifiant l'id test -->
 						<!-- Les fichiers contenus dans src/main/resources/conf-test seront filtrés, c'est à dire 
@@ -107,6 +107,39 @@
 				</resources>
 			</build>
 		</profile>
+		
+		<!-- Afin qu'aucune version SNAPSHOT ne soit envoyée en production, il faut utiliser le plugin maven-enforcer-plugin. 
+			Cependant, comme cette vérification concerne uniquement les constructions ayant pour cible la production, il faut 
+			 ajouter l'exécution de ce plugin dans un profil dédié à la cible production. Il faut donc ajouter le plugin au build du 
+			 profil target-prod : -->
+		<profile>
+            <id>target-prod</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-target-prod-no-snapshot</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <!-- Le projet et son parent ne doivent pas être en SNAPSHOT -->
+                                        <requireReleaseVersion />
+                                        <!-- Aucune dépendance ne doit être en SNAPSHOT -->
+                                        <requireReleaseDeps />
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 	
 	<!-- =============================================================== -->

@@ -192,6 +192,13 @@
 	            	<version>3.3.2</version>
 	            </plugin>
 	            
+	            <!-- Plugin pour l'Assemblage du module "ticket-batch" en fichier JAR -->
+	            <plugin>
+	            	<groupId>org.apache.maven.plugins</groupId>
+	            	<artifactId>maven-assembly-plugin</artifactId>
+	            	<version>3.2.0</version>
+	            </plugin>
+	            
 	    	</plugins>
 		</pluginManagement>
 		

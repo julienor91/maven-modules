@@ -24,6 +24,7 @@
 		
 		<%@ include file="_include/header.jsp" %>
 		
+		<br /><br /><br /><br />
 		<div class="container">
 		    <ul>
 		        <li>Application : ${application.name}</li>
@@ -31,6 +32,7 @@
 		        <li>Date du build : ${maven.build.timestamp}</li>
 		    </ul>
 		</div>
+		<br />
 		
 		<%@ include file="_include/footer.jsp" %>
 		
