@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?> -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -27,7 +27,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<!-- packaging : type de packaging devant être généré par Maven (jar, war, 
 		ear, ...). -->
-	<packaging>pom</packaging>
+	<packaging>pom</packaging>	
 	<!-- Un projet Maven est identifié par ses coordonnées : groupId:artifactId:version -->
 
 	<!-- ===== INFORMATIONS GENERALES ===== -->
@@ -63,10 +63,10 @@
 
 	<!-- Les properties sont des sortes de constantes. Elles sont remplacées par leur valeur 
 		lors de l'exécution de Maven en utilisant la notation ${maPropriete} (qui sera remplacée 
-		par la valeur de la propriété maPropriete). -->
+		par la valeur de la propriété maPropriete). Elles sont également utilisées avec les filtres. -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- Attention, on doit changer la version "1.7" si un problème survient avec la commande "mvn package" -->
+		<!-- Attention, on doit changer la version "1.8" si un problème survient avec la commande "mvn package" -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -124,13 +124,13 @@
 			<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
 
 			<!-- En déclarant les dépendances à cet emplacement, soit dans les balises 
-				"dependencyManagement", alors l'ensemble de ces bibliothèques pourront 
-				être réutilisés par tous les modules du projet. -->
+				"dependencyManagement", alors l'ensemble de ces bibliothèques pourra 
+				être réutilisé par tous les modules du projet. -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
-				<scope>test</scope>
+				<scope>test</scope><!-- C'est également la valeur par défault. -->
 			</dependency>
 			<dependency>
 				<groupId>javax.validation</groupId>
