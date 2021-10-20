@@ -34,6 +34,11 @@
 	<!-- artifactId : identifiant du projet -->
 	<artifactId>ticket-batch</artifactId>
 	
+	<!-- packaging : type de packaging devant être généré par Maven (jar, war, 
+		ear, ...). -->
+	<!-- Le packaging JAR est celui par défault donc pas besoin de le spécifier -->
+	<!-- 	<packaging>jar</packaging> -->
+	
 	<!-- ===== INFORMATIONS GENERALES ===== -->
 	
 	<!-- name : le nom du module -->
@@ -71,11 +76,12 @@
 		<!-- ===== BIBLIOTHEQUES TIERCES ===== -->
 		
 		<!-- Les bibliothèques enregistrées dans le projet parent sont utilisés par ce module. 
-			Du coup on peut ajouter ces bibliothèques de la même manière qu'un module. -->
+			Du coup on peut ajouter ces bibliothèques de la même manière qu'un module. 
+			Par exemple, on a pas besoinde spécifier la version. -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<scope>test</scope><!-- C'est également la valeur par défault. -->
 		</dependency>
 		
 	</dependencies>

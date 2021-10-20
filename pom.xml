@@ -11,7 +11,7 @@
 	<!-- =============================================================== -->
 	
 	<!-- ===== INFORMATIONS MAVEN ===== -->
-
+	
 	<!-- groupId : identifiant de l'organisation gérant le projet. Cet identifiant 
 		reprend la notation des packages Java. En général, celui-ci correspond au 
 		package de base de l'application, mais ce n'est pas obligatoire. -->
@@ -34,9 +34,11 @@
 
 	<!-- name : le nom du projet -->
 	<name>ticket</name>
-	<!-- url : URL du projet ou de l'application en production. -->
+	<!-- url : URL du projet ou de l'application en production => la page d'accueil du projet -->
 	<url>http://maven.apache.org</url>
-	<!-- description : la description du projet -->
+	<!-- description : la description du projet. Une description courte et lisible du projet. 
+		Bien que cela ne doive pas remplacer la documentation formelle, un commentaire rapide 
+		à tout lecteur du POM est toujours utile. -->
 	<description>
 		La super application qui sert à faire ceci ou cela...
 	</description>
@@ -49,13 +51,38 @@
    	</organization>
 
 	<!-- ===== LICENCES ===== -->
-
+	
+	<!-- Les licences sont des documents juridiques définissant comment et quand un projet 
+		(ou des parties d'un projet) peut être utilisé. Un projet doit répertorier les licences 
+		qui s'appliquent directement à ce projet, et non les licences qui s'appliquent aux 
+		dépendances du projet. -->
 	<licenses>
           	<license>
                 	<name>Apache License, Version 2.0</name>
                 	<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         	</license>
 	</licenses>
+	
+	<!-- =============================================================== -->
+    <!-- ***** DISTRIBUTIONMANAGEMENT (=> SITE MAVEN) ***** -->
+    <!-- =============================================================== -->
+    
+    <!-- On définit l'url de déploiement du site Maven en fonction du fichier /ticket/src/site/site.xml -->
+    <!-- C'est ici que l'on doit spécifier où le site sera déployé. Il faudra également définir le plugin de 
+    	génération du site Maven dans la balise <pluginManagement> au bas du fichier. -->
+    <distributionManagement>
+        <site>
+        	<!-- L'élément <id> identifie le référentiel, de sorte que l'on peut y attacher des informations 
+        		d'identification dans le fichier settings.xml à l'aide de l'élément <servers> comme on le ferait 
+        		pour tout autre référentiel. -->
+            <id>site-projet</id>
+            <!-- La balise <url> donne l'emplacement vers lequel déployer le projet. Ici, nous copions sur l'hôte 
+            	<id>site-projet</id> en utilisant le chemin /www/docs/project/ via le protocole scp. Si les 
+            	sous-projets héritent de l'URL du site d'un POM parent, ils ajouteront automatiquement leur 
+            	<artifactId> pour former leur emplacement de déploiement effectif. -->
+            <url>scp://localhost/tmp/</url>
+        </site>
+    </distributionManagement>
 
 	<!-- =============================================================== -->
 	<!-- ***** PROPERTIES (=> CONSTANTES DU POM) ***** -->
@@ -74,7 +101,7 @@
 	<!-- =============================================================== -->
 	<!-- ***** MODULES (=> SOUS DOSSIER) ***** -->
 	<!-- =============================================================== -->
-
+	
 	<modules>
 		<module>ticket-batch</module>
 		<module>ticket-webapp</module>
@@ -82,7 +109,7 @@
 		<module>ticket-consumer</module>
 		<module>ticket-model</module>
 	</modules>
-
+	
 	<!-- =============================================================== -->
 	<!-- ***** DEPENDENCIES (=> GESTION DES DEPENDANCES) ***** -->
 	<!-- =============================================================== -->
@@ -129,7 +156,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.11</version>
+				<version>4.13.2</version>
 				<scope>test</scope><!-- C'est également la valeur par défault. -->
 			</dependency>
 			<dependency>
@@ -176,7 +203,7 @@
 	            <plugin>
 	                <groupId>org.apache.maven.plugins</groupId>
 	                <artifactId>maven-compiler-plugin</artifactId><!-- plugin -->
-	                <version>3.1</version>
+	                <version>3.8.1</version>
 	                <!-- Pour modifier les options "showDeprecation" et "showWarnings" du goal "compile" 
 						du plugin "maven-compiler-plugin" -->
 	                <configuration>
@@ -184,6 +211,12 @@
 	                    <showWarnings>true</showWarnings>
 	                </configuration>
 	            </plugin>
+	            
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
 	            
 	            <!-- Plugin respansable de la génération du fichier war de ticket-webapp -->
 	            <plugin>
@@ -196,8 +229,57 @@
 	            <plugin>
 	            	<groupId>org.apache.maven.plugins</groupId>
 	            	<artifactId>maven-assembly-plugin</artifactId>
-	            	<version>3.2.0</version>
+	            	<version>3.3.0</version>
 	            </plugin>
+	            
+	            <!-- Plugin de génération du site Maven avec le fichier /ticket/src/site/site.xml -->
+	            <!-- Ce plugin va créer un site pour le projet parent et pour chaque module et ensuite 
+	            	le plugin maven-site-plugin agrège tous ces sites en un seul -->
+	            <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
+                    <configuration>
+                        <!-- Je veux le site par défault en français. La première locale sera la version par 
+                        	défaut du site et les autres versions seront générées dans un sous-dossier du 
+                        	répertoire site. -->
+                        <locales>fr,en,it</locales>
+                    </configuration>
+	            </plugin>
+	            
+	            <!-- Groupe de plugin pour enlever le WARNING : 
+	            	Report plugin org.apache.maven.plugins:maven-project-info-reports-plugin has an empty version. -->
+				<plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-resources-plugin</artifactId>
+		            <version>3.2.0</version>
+		            <executions>
+		            	<execution>
+		                    <phase>test</phase>
+		                    <goals>
+		                        <goal>resources</goal>
+		                        <goal>testResources</goal>
+		                    </goals>
+		                </execution>
+		            </executions>
+        		</plugin>
+		        <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-project-info-reports-plugin</artifactId>
+		            <version>3.1.2</version>
+		        </plugin>
+		        <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-clean-plugin</artifactId>
+		            <version>3.1.0</version>
+		            <configuration>
+		                <filesets>
+		                    <fileset>
+		                        <directory>src/main/generated-groovy-stubs</directory>
+		                    </fileset>
+		                </filesets>
+		            </configuration>
+		        </plugin>
 	            
 	    	</plugins>
 		</pluginManagement>
