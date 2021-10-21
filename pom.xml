@@ -280,10 +280,122 @@
 		                </filesets>
 		            </configuration>
 		        </plugin>
+		        
+		        <!-- Ce plugin est uniquement pour le site Maven -->
+		        <plugin>
+          			<groupId>org.apache.maven.plugins</groupId>
+		          	<artifactId>maven-checkstyle-plugin</artifactId>
+		          	<version>3.1.2</version>
+		        </plugin>
 	            
 	    	</plugins>
 		</pluginManagement>
 		
 	</build>
+	
+	<!-- =============================================================== -->
+    <!-- ***** GESTION DES RAPPORTS POUR LE SITE MAVEN ***** -->
+    <!-- =============================================================== -->
+    
+    <!-- ===== PUGLIN UNIQUEMENT POUR PERSONNALISER LE SITE MAVEN ===== -->
+    
+    <!-- Attention, ce plugin est un plugin de rapport (déclarer dans le fichier "/ticket/src/site/site.xml" 
+    	et non de contraction. Il doit donc être ajouté à la section <reporting> et non au <build>. 
+    	Il permet de détailler la liste des rapports dans le site Maven. Il n'a rien avoir avec le projet en lui même. -->
+    <reporting>
+        <plugins>
+        
+        	 <!-- ===== Rapport sur les informations du projet dans le site Maven ===== -->
+        	 <!-- En insérant seulement ce plugin on récupère un onglet avec toutes les informations sur 
+        	 	le projet dans le site Maven -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.1.2</version>
+                <!-- Dans le cas où l'on voudrait n'avoir que certaines informations et non toutes celles-ci d'un coup, 
+                	alors il faudrait rajouter ce morceau de code en sélectionnant bien sûr dans la balise <report> les 
+                	informations demandées. -->
+<!--                 <reportSets> -->
+<!--                     <reportSet> -->
+<!--                         <reports> -->
+<!--                             <report>index</report> -->
+<!--                             <report>summary</report> -->
+<!--                             <report>plugins</report> -->
+<!--                         </reports> -->
+<!--                     </reportSet> -->
+<!--                 </reportSets> -->
+            </plugin>
+            
+            <!-- ===== Rapport sur les tests dans le site Maven ===== -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <!-- reportSet d'agrégation des rapports des sous-projets (modules) -->
+                <!-- Les tests des modules sont affichés dans le projet parent -->
+                <reportSets>
+					<reportSet>
+					    <id>aggregate</id>
+					    <reports>
+					        <report>report</report>
+					    </reports>
+					    <!-- Ne pas exécuter ce sous-rapport dans les sous-projets (modules), on demande ainsi 
+					    	cette exécution uniquement dans le projet parent. -->
+					    <inherited>false</inherited><!-- "false" pour le reportSet d'agrégation -->
+					    <configuration>
+					        <aggregate>true</aggregate>
+					    </configuration>
+					</reportSet>
+					<!-- reportSet non agrégé, exécuté dans tous les sous-projets (modules) -->
+					<!-- Les tests sont affichés dans les modules correspondant de manière indépendante au projet parent -->
+					<reportSet>
+					    <id>modules</id>
+					    <!-- exécuter ce sous-rapport dans les sous-projets -->
+					    <inherited>true</inherited><!-- "true" pour le reportSet de base -->
+					    <reports>
+					        <report>report</report>
+					    </reports>
+					    <configuration>
+					        <aggregate>false</aggregate>
+					    </configuration>
+					</reportSet>
+				</reportSets>
+            </plugin>
+            
+            <!-- ===== Rapport d'analyse du code par Checkstyle ===== -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <configLocation>src/build/checkstyle.xml</configLocation>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <reportSets>
+                    <!-- reportSet exécuté dans tous les modules -->
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                    <!-- reportSet d'agrégation des rapports des sous-modules -->
+                    <reportSet>
+                        <id>checkstyle-aggregate</id>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <skipExec>true</skipExec>
+                        </configuration>
+                        <reports>
+                            <report>checkstyle-aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            
+        </plugins>
+    </reporting>
 	
 </project>

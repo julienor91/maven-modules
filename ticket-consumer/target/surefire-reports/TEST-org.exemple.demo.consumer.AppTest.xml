@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.exemple.demo.consumer.AppTest" time="0.095" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.exemple.demo.consumer.AppTest" time="0.077" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="14"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-14.0.2.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire/surefirebooter18440553281050403931.jar /Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire 2021-10-20T16-52-37_302-jvmRun1 surefire11176416200679134009tmp surefire_11299682881968119777tmp"/>
+    <property name="sun.java.command" value="/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire/surefirebooter7260626828371510755.jar /Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire 2021-10-21T16-25-59_780-jvmRun1 surefire7999606755227364316tmp surefire_110074338809638202169tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/test-classes:/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/classes:/Users/julienorrado/maven-workspace/ticket/ticket-model/target/ticket-model-1.0-SNAPSHOT.jar:/Applications/apache-maven-3.8.3/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Applications/apache-maven-3.8.3/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire/surefirebooter18440553281050403931.jar"/>
+    <property name="surefire.real.class.path" value="/Users/julienorrado/maven-workspace/ticket/ticket-consumer/target/surefire/surefirebooter7260626828371510755.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="14.0.2+12-46"/>
@@ -53,5 +53,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="58.0"/>
   </properties>
-  <testcase name="testApp" classname="org.exemple.demo.consumer.AppTest" time="0.006"/>
+  <testcase name="testApp" classname="org.exemple.demo.consumer.AppTest" time="0.005"/>
 </testsuite>
